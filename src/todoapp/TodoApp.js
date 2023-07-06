@@ -1,5 +1,5 @@
 import classNames from "classnames"
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const ITEMS=[
         {
@@ -27,6 +27,12 @@ const ITEMS=[
 function TodoApp(){
     const [todo, setTodo] = useState(ITEMS);
     const [value, setValue] = useState('');
+    const inputRef = useRef();
+
+    useEffect(() => {
+        inputRef.current.focus();
+    },[]);
+    
 
     function onItemChange (clickedItem) {
         const changedCompleted = todo.map( item=>{
@@ -38,13 +44,16 @@ function TodoApp(){
         setTodo(changedCompleted)
     }
 
+    const generateID = ()=> {
+        return todo.length +1;
+    }
     
     function addList(e){
         e.preventDefault();
         const newObj = [
             ...todo,
             {
-                id: Date.now(),
+                id: generateID(),
                 title: value,
                 completed: false
             }
@@ -57,7 +66,12 @@ function TodoApp(){
     return (
             <div>
                 <form action="" onSubmit={addList}>
-                    <input type="text" value={value} onChange={e=>setValue(e.target.value)}/>
+                    <input
+                        ref={inputRef} 
+                        type="text" 
+                        value={value} 
+                        onChange={e=>setValue(e.target.value)}
+                    />
                 </form>
                 <ul>
                     {todo.map(item=>{
