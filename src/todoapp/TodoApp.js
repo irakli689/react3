@@ -1,6 +1,6 @@
 import classNames from "classnames"
 import { useEffect, useRef, useState } from "react";
-
+import Input from "./components/Input";
 const ITEMS=[
         {
             id: 1,
@@ -48,7 +48,7 @@ function TodoApp(){
         return todo.length +1;
     }
     
-    function addList(e){
+    function onAddList(e){
         e.preventDefault();
         const newObj = [
             ...todo,
@@ -70,8 +70,8 @@ function TodoApp(){
 
     return (
             <div>
-                <form action="" onSubmit={addList}>
-                    <input
+                <form action="" onSubmit={onAddList}>
+                    <Input
                         ref={inputRef} 
                         type="text" 
                         value={value} 
