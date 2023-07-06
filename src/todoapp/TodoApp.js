@@ -63,6 +63,11 @@ function TodoApp(){
         setValue('')
     }
 
+    function onClickDelete (romeveitem) {
+        console.log(romeveitem.id);
+        setTodo(todo.filter(item=>item.id !== romeveitem.id))
+    }
+
     return (
             <div>
                 <form action="" onSubmit={addList}>
@@ -75,17 +80,21 @@ function TodoApp(){
                 </form>
                 <ul>
                     {todo.map(item=>{
-                        return <li key={item.id} className={classNames({completed: item.completed})}>
+                        return (<li key={item.id} className={classNames({completed: item.completed})}>
                                     <input 
                                         type="checkbox" 
                                         checked={item.completed}
                                         onChange={() => onItemChange(item)}
                                     />
                                     {item.title}
-                                    <button>delete</button>
-                                </li>
+                                    <button onClick={()=>onClickDelete(item)}>delete</button>
+                                </li>)
+                                
                     })}
                 </ul>
+                <p>completed: {todo.filter(item=>item.completed).length}</p>
+                <p>uncompleted: {todo.filter(item=>!item.completed).length}</p>
+                <p>total: {todo.length}</p>
             </div>
         )
 }
