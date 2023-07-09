@@ -1,7 +1,9 @@
-import { forwardRef, useImperativeHandle, useRef } from "react";
+import { forwardRef, useContext, useImperativeHandle, useRef } from "react";
+import ThemeContext from "../context/ThemeContext";
 
 function Input(props, ref){
     const inputRef=useRef();
+    const themeContext=useContext(ThemeContext);
 
     useImperativeHandle ( ref, ()=> ({
         focus: () => {
@@ -9,11 +11,13 @@ function Input(props, ref){
         }
     }))
     return (
-        <input
+        <div className={`input-${themeContext.theme}`}>
+            <input
             {...props} 
             ref={inputRef}
             className="input"
-        />
+            />
+        </div>
     )
 }
 
