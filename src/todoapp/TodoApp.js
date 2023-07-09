@@ -4,6 +4,7 @@ import Input from "./components/Input";
 import SelectTheme from "./components/SelectTheme";
 import UserContext from "./context/UserContext";
 import Auth from "./Auth";
+import axios from "axios";
 
 const ITEMS=[
         {
@@ -76,9 +77,9 @@ function TodoApp () {
     }
 
 
-    if(userContext.user == null){
-        return <Auth />
-    }
+    // if(userContext.user == null){
+    //     return <Auth />
+    // }
     return (
         <div>
             <form action="" onSubmit={onAddList}>
